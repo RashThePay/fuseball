@@ -83,6 +83,9 @@ export const create = (
     playersMovement: {
       [playerData.id]: {},
     },
+    playersSpeed: {
+      [playerData.id]: 0,
+    },
     players: newLobby.players.map((player, index) => ({
       ...validatedPlayer,
       position: getInitialPosition(index, 0),

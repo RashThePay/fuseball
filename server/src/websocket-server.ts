@@ -11,7 +11,7 @@ import express from "express";
 import session from "express-session";
 import dotenv from "dotenv";
 
-import newsFeature from "./features/news";
+// import newsFeature from "./features/news";
 import oauthFeature from "./features/oauth";
 import selfFeature from "./features/self";
 
@@ -53,7 +53,7 @@ export const createServer = (port: number): WebSocket.Server => {
     res.send("Fuseball API");
   });
 
-  app.use("/news", newsFeature);
+  // app.use("/news", newsFeature);
   app.use("/auth", oauthFeature);
   app.use("/self", selfFeature);
 

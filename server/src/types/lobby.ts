@@ -48,6 +48,7 @@ export type LobbyLive = {
   status: LobbyStatus;
   players: LobbyPlayerLive[];
   playersMovement: Record<string, Record<string, boolean>>;
+  playersSpeed: Record<string, number>;
   score: ScoreType;
   chatMessages: Record<string, { message: string; timestamp: number }>;
   ball: Ball;

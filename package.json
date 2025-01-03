@@ -1,0 +1,14 @@
+{
+  "name": "fuseball",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"https://fuseball.io/logo.png\" />\r </p>\r <h1 align=\"center\">Fuseball.IO - Multiplayer Football Game</h1>\r <p align=\"center\">\r   <img src=\"https://img.shields.io/github/languages/code-size/hxtnv/fuseball.svg\" />\r   <a href=\"https://github.com/hxtnv/fuseball/issues\">\r     <img alt=\"downloads\" src=\"https://img.shields.io/github/issues-raw/hxtnv/fuseball.svg\" target=\"_blank\" />\r   </a>\r   <a href=\"https://fuseball.io/\">\r     <img src=\"https://img.shields.io/website/https/fuseball.io/fuseball.svg?up_color=green&up_message=online\" />\r   </a>\r   <a href=\"https://github.com/hxtnv/fuseball/blob/master/LICENSE.md\">\r     <img alt=\"License: MIT\" src=\"https://img.shields.io/badge/License-MIT-yellow.svg\" target=\"_blank\" />\r   </a>\r </p>",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \" cd server && npm run start\" \"cd client && npm run dev\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

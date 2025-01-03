@@ -1,6 +1,8 @@
 import {
   playerMoveStart,
   playerMoveEnd,
+  playerKickStart,
+  playerKickEnd,
   updatePlayerPosition,
 } from "./player-movement";
 import {
@@ -21,6 +23,8 @@ const lobbyManager = () => {
   return {
     playerMoveStart,
     playerMoveEnd,
+    playerKickStart,
+    playerKickEnd,
     updatePlayerPosition,
     getAll,
     getAllLive,

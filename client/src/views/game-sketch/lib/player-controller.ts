@@ -36,6 +36,9 @@ const playerController = (state: StateType) => {
 
     if (KICK_BUTTONS.includes(key)) {
       state.targetCameraScale = 0.9;
+      emitter.emit("ws:send", {
+        event: "player-kick-start",
+      });
     }
   };
 
@@ -47,7 +50,7 @@ const playerController = (state: StateType) => {
     if (KICK_BUTTONS.includes(key)) {
       state.targetCameraScale = 1;
       emitter.emit("ws:send", {
-        event: "player-kick",
+        event: "player-kick-end",
       });
     }
   };

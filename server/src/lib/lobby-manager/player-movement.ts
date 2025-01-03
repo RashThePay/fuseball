@@ -30,10 +30,61 @@ export const playerMoveEnd = (direction: string, playerData: PlayerData) => {
   state.lobbiesLive[existingLobby.id].playersMovement[playerData.id][
     direction
   ] = false;
+  setState(state);
+};
+export const playerKickStart = (direction: string, playerData: PlayerData) => {
+  const state = getState();
+  const { lobby: existingLobby } = getClientLobby(playerData.id);
+
+  if (!existingLobby) {
+    return;
+  }
+
+  state.lobbiesLive[existingLobby.id].playersMovement[playerData.id][
+    'kick'
+  ] = true;
 
   setState(state);
 };
 
+export const playerKickEnd = (direction: string, playerData: PlayerData) => {
+  const state = getState();
+  const { lobby: existingLobby } = getClientLobby(playerData.id);
+
+  if (!existingLobby) {
+    return;
+  }
+
+  state.lobbiesLive[existingLobby.id].playersMovement[playerData.id][
+    'kick'
+  ] = false;
+
+  setState(state);
+};
+export const playerSpeedIncrease = (id: number) => {
+  const state = getState();
+  const { lobby: existingLobby } = getClientLobby(id);
+
+  if (!existingLobby) {
+    return;
+  }
+
+  if (state.lobbiesLive[existingLobby.id].playersSpeed[id] < 20) state.lobbiesLive[existingLobby.id].playersSpeed[id] ++;
+
+  setState(state);
+}
+export const playerSpeedDecrease = (id: number) => {
+  const state = getState();
+  const { lobby: existingLobby } = getClientLobby(id);
+
+  if (!existingLobby) {
+    return;
+  }
+
+  if (state.lobbiesLive[existingLobby.id].playersSpeed[id] > 1) state.lobbiesLive[existingLobby.id].playersSpeed[id] -=2;
+
+  setState(state);
+}
 export const updatePlayerPosition = ({
   lobbyId,
   playerId,
@@ -44,17 +95,19 @@ export const updatePlayerPosition = ({
   const state = getState();
   const lobbyState = state.lobbiesLive[lobbyId];
   const movement = lobbyState.playersMovement[playerId] ?? {};
-
-  // if (!movement || !Object.values(movement).includes(true)) {
-  //   return;
-  // }
-
+  if (Object.values(movement).includes(true)) {
+     playerSpeedIncrease(playerId)
+  } else {
+    playerSpeedDecrease(playerId)
+  }
+  const speed = lobbyState.playersSpeed[playerId] ?? 0;
   state.lobbiesLive[lobbyId].players = lobbyState.players.map((player) => {
     if (player.id === playerId) {
       const { newPosition, newBallPosition, didBallMove } =
         calculateNewPlayerPosition({
           player,
           movement,
+          speed,
           allPlayers: lobbyState.players,
           ball: lobbyState.ball,
           state,

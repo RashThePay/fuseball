@@ -7,6 +7,7 @@ import constrainPositionToField from "./constrain-position-to-field";
 type Props = {
   player: LobbyPlayerLive;
   movement: Record<string, boolean>;
+  speed: number;
   allPlayers: LobbyPlayerLive[];
   ball: Ball;
   state: State;
@@ -85,6 +86,7 @@ const handlePlayerCollisions = (
 const calculateNewPlayerPosition = ({
   player,
   movement,
+  speed,
   allPlayers,
   ball,
   state,
@@ -94,21 +96,21 @@ const calculateNewPlayerPosition = ({
 
   let newPosition = { ...player.position };
   let didBallMove = false;
-
+  let newSpeed = PLAYER.SPEED + Math.max(5, PLAYER.SPEED * (1+speed*0.05));
   if (movement.up) {
-    newPosition.y -= PLAYER.SPEED;
+    newPosition.y -= newSpeed
   }
 
   if (movement.down) {
-    newPosition.y += PLAYER.SPEED;
+    newPosition.y += newSpeed
   }
 
   if (movement.left) {
-    newPosition.x -= PLAYER.SPEED;
+    newPosition.x -= newSpeed
   }
 
   if (movement.right) {
-    newPosition.x += PLAYER.SPEED;
+    newPosition.x += newSpeed
   }
 
   newPosition = handlePlayerCollisions(newPosition, player, allPlayers);
@@ -128,16 +130,8 @@ const calculateNewPlayerPosition = ({
       kickDirectionX * kickDirectionX + kickDirectionY * kickDirectionY
     );
 
-    // Normalize the direction
-    const normalizedDirectionX = kickDirectionX / kickDistance;
-    const normalizedDirectionY = kickDirectionY / kickDistance;
-
-    // Add a velocity to the ball in the direction of the kick
-    const kickStrength = Math.sqrt(
-      playerVelocity.x * playerVelocity.x + playerVelocity.y * playerVelocity.y
-    ); // use player velocity magnitude as the strength
-    ball.velocity.x = normalizedDirectionX * kickStrength;
-    ball.velocity.y = normalizedDirectionY * kickStrength;
+    ball.velocity.x = newSpeed * kickDirectionX / 140
+    ball.velocity.y = newSpeed * kickDirectionY / 140
 
     didBallMove = true;
   }

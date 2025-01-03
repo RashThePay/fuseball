@@ -63,6 +63,14 @@ export const handleMessage = (
         handlePlayerMoveEnd(parsedMessage.data, ws, wss);
         break;
 
+      case "player-kick-start":
+        handlePlayerKickStart(parsedMessage.data, ws, wss);
+        break;
+
+      case "player-kick-end":
+        handlePlayerKickEnd(parsedMessage.data, ws, wss);
+        break;
+
       case "chat-message":
         handleChatMessage(parsedMessage.data, ws, wss);
         break;
@@ -214,7 +222,20 @@ const handlePlayerMoveEnd = (
 
   lobbyManager.playerMoveEnd(data.direction, ws.playerData);
 };
-
+const handlePlayerKickStart = (
+  data: PlayerMove,
+  ws: WebSocketClient,
+  wss: WebSocket.Server
+) => {
+  lobbyManager.playerKickStart("kick", ws.playerData);
+};
+const handlePlayerKickEnd = (
+  data: PlayerMove,
+  ws: WebSocketClient,
+  wss: WebSocket.Server
+) => {
+  lobbyManager.playerKickEnd("kick", ws.playerData);
+};
 const handleCreateLobby = (
   data: CreateLobby,
   ws: WebSocketClient,

@@ -30,11 +30,11 @@ const playersRenderer = (p: p5, state: StateType) => {
     // shadow
     p.noStroke();
     p.fill(0, 0, 0, 35);
-    p.ellipse(0, 0, PLAYER.SIZE + PLAYER.SIZE * 0.42);
+    p.ellipse(0, 0, PLAYER.SIZE + PLAYER.SIZE * 0.2);
 
     // core
     p.stroke(51);
-    p.strokeWeight(4);
+    p.strokeWeight(2);
     p.fill(253, 200, 118);
     p.ellipse(0, 0, PLAYER.SIZE);
 
@@ -62,11 +62,11 @@ const playersRenderer = (p: p5, state: StateType) => {
     // shadow
     p.noStroke();
     p.fill(0, 0, 0, 35);
-    p.ellipse(0, 0, BALL.SIZE + BALL.SIZE * 0.42);
+    p.ellipse(0, 0, BALL.SIZE + BALL.SIZE * 0.2);
 
     p.fill(255);
     p.stroke(51);
-    p.strokeWeight(4);
+    p.strokeWeight(2);
 
     p.ellipse(0, 0, BALL.SIZE);
 
